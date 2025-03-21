@@ -1,4 +1,5 @@
 import type { ThemeStyles } from '../types'
+import { dafuxiaojiTheme } from './dafuxiaoji'
 import { defaultTheme } from './default'
 import { jieTheme } from './jie'
 import { nindleTheme } from './nindle'
@@ -7,6 +8,7 @@ export const allThemes: ThemeStyles[] = [
   defaultTheme,
   jieTheme,
   nindleTheme,
+  dafuxiaojiTheme,
 ]
 
 // 导出默认主题

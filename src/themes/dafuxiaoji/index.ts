@@ -4,9 +4,9 @@ import { exportAllContainers } from './export'
 /**
  * nindle 主题
  */
-export const nindleTheme: ThemeStyles = {
-  code: 'nindle',
-  name: 'Nindle',
+export const dafuxiaojiTheme: ThemeStyles = {
+  code: 'dafuxiaoji',
+  name: '大福小吉',
   styles: {
     base: {
       'font-family': 'mp-quote, "PingFang SC", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", Arial, sans-serif',
