@@ -2,10 +2,9 @@ import type { ElementProcessor } from '../processors'
 import { applyStyles } from '@/lib'
 
 /**
- * 小帅哥洁洁主题的处理器
+ * nindle 主题的处理器
  */
-export const jieThemeProcessors: Record<string, ElementProcessor> = {
-  // 可以在这里添加小帅哥洁洁主题的特定处理方法
+export const nindleThemeProcessors: Record<string, ElementProcessor> = {
   container: (elements, styles) => {
     const container = styles.container
     if (!container)

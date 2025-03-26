@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import {
   Bold,
+  BookmarkPlus,
   Code,
   Heading1,
   Heading2,
@@ -234,8 +235,12 @@ const MarkdownEditor = React.memo(({ value, onChange }: MarkdownEditorProps) => 
         cursorOffset = 5
         break
       case 'container':
-        insertText = `:::\n${selectedText || '自定义容器内容'}\n:::`
+        insertText = `:::\n\n${selectedText || '自定义容器内容'}\n\n:::`
         cursorOffset = 11
+        break
+      case 'mark':
+        insertText = `<mark>${selectedText || '标注内容'}</mark>`
+        cursorOffset = 6
         break
     }
 
@@ -332,6 +337,11 @@ const MarkdownEditor = React.memo(({ value, onChange }: MarkdownEditorProps) => 
       icon: <Package />,
       format: 'container',
     },
+    {
+      label: '标注',
+      icon: <BookmarkPlus />,
+      format: 'mark',
+    },
   ], [])
 
   // 组件挂载后设置焦点
@@ -363,7 +373,7 @@ const MarkdownEditor = React.memo(({ value, onChange }: MarkdownEditorProps) => 
       </div>
       <textarea
         ref={editorRef}
-        className="flex-1 p-4 w-full resize-none outline-none font-mono text-base"
+        className="flex-1 p-4 w-full mb-[150px] mt-[50px] resize-none outline-none font-mono text-base"
         value={value}
         onChange={updateContent}
         onKeyDown={handleKeyboardShortcuts}

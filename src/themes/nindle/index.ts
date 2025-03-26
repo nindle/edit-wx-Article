@@ -24,7 +24,7 @@ export const nindleTheme: ThemeStyles = {
         'display': 'inline-block',
         'padding': '1px 10px',
         'margin-bottom': '12px',
-        'color': '#fff',
+        'color': '#f5f5f5',
         'background-color': '#4b47e8',
         'font-size': '18px',
         'border-radius': '14px 0 14px 14px',
@@ -46,6 +46,16 @@ export const nindleTheme: ThemeStyles = {
       'color': '#ff6827',
       'font-weight': 'normal',
     },
+    mark: {
+      'all': 'unset',
+      'background': 'none !important',
+      'background-color': 'transparent !important',
+      'color': '#f24848',
+      'font-weight': '500',
+      'font-family': 'inherit',
+      'font-size': 'inherit',
+      'line-height': 'inherit',
+    },
     container: {
       default: {
         'padding': '12px',
@@ -55,7 +65,8 @@ export const nindleTheme: ThemeStyles = {
       },
     },
   },
-  footerContent: '<p style="padding: 0; margin: 0 0 16px; text-align: center; font-size: 16px; color: #666;">关注点赞，好运不断！点个<span style="color: #ff4f79; font-weight: bold;">在看</span>，你最好看🌹</p>',
+  headerContent: '<div style="text-align: center; margin-bottom: 20px;"><img src="https://mmbiz.qpic.cn/sz_mmbiz_gif/HCXMMMTPuuzGPAMhqicsqBQKyklZGYhicrJjESGEhTQwIKrFicAhYbK3rMtlWmjFCT34duvGQpJfA5DSqT3zhqglw/640?wx_fmt=gif&amp;from=appmsg" alt="关注公众号" style="max-width: 100%; border-radius: 12px; margin: 0 auto;" /></div>' as string,
+  footerContent: '<div style="text-align: center; margin-bottom: 20px;"><img src="https://mmbiz.qpic.cn/sz_mmbiz_gif/HCXMMMTPuuzGPAMhqicsqBQKyklZGYhicr520N0aPxvAfXib6GnNxz2Xo4gK1hrKsMSgHnxzf8DxgiaqIvbwFKv7ZQ/640?wx_fmt=gif&amp;from=appmsg" alt="关注公众号" style="max-width: 100%; border-radius: 12px; margin: 0 auto;" /></div>' as string,
   onAfterRender: (contentElement) => {
     const defaultContainers = contentElement.querySelectorAll('.custom-container.default')
     if (defaultContainers.length > 0) {

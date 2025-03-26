@@ -2,6 +2,7 @@ import type { ThemeStyles } from '../types'
 import { applyStyles } from '../lib/html'
 import { defaultThemeProcessors } from './default/processors'
 import { jieThemeProcessors } from './jie/processors'
+import { nindleThemeProcessors } from './nindle/processors'
 
 // 定义处理器类型
 export type ElementProcessor = (elements: HTMLElement[], styles: ThemeStyles['styles']) => void
@@ -83,6 +84,11 @@ export const baseElementProcessors: Record<string, ElementProcessor> = {
     applyStyles(elements, {}, styles.em)
   },
 
+  // 处理 mark 标签
+  mark: (elements, styles) => {
+    applyStyles(elements, {}, styles.mark)
+  },
+
   // 处理分割线
   hr: (elements, styles) => {
     applyStyles(elements, {}, styles.hr)
@@ -115,6 +121,7 @@ export const baseElementProcessors: Record<string, ElementProcessor> = {
 export const themeProcessors: ThemeProcessors = {
   default: defaultThemeProcessors,
   jie: jieThemeProcessors,
+  nindle: nindleThemeProcessors,
 }
 
 /**

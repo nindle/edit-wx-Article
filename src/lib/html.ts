@@ -13,6 +13,7 @@ const ELEMENT_SELECTORS = {
   hr: 'hr',
   strong: 'strong',
   em: 'em',
+  mark: 'mark',
   container: '.custom-container',
 }
 

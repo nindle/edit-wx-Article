@@ -48,6 +48,8 @@ export interface ThemeStyles {
     strong?: Record<string, string>
     /** 斜体样式 */
     em?: Record<string, string>
+    /** 标注样式 */
+    mark?: Record<string, string>
     /** 分割线样式 */
     hr?: Record<string, string>
     /** 容器样式 */
