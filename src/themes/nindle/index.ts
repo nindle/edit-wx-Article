@@ -62,8 +62,6 @@ export const nindleTheme: ThemeStyles = {
         'margin': '0 0 16px',
         'border': '1px dashed #5b9cf8',
         'border-radius': '12px',
-        'position': 'relative',
-        'padding-top': '20px',
       },
     },
   },
