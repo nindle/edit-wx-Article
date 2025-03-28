@@ -18,26 +18,34 @@ export const nindleThemeProcessors: Record<string, ElementProcessor> = {
         return
 
       const containerClass = containerElement.className
+
       // 应用特定类型的样式
       if (containerClass.includes('custom-container')) {
         containerCount++
 
         // 创建序号元素
-        const numberElement = document.createElement('div')
+        const numberElement = document.createElement('p')
+        numberElement.className = 'container-number'
         numberElement.textContent = containerCount.toString().padStart(2, '0')
-        numberElement.style.position = 'absolute'
-        numberElement.style.top = '-12px'
-        numberElement.style.left = '20px'
-        numberElement.style.width = '50px'
-        numberElement.style.height = '24px'
-        numberElement.style.lineHeight = '24px'
-        numberElement.style.textAlign = 'center'
-        numberElement.style.fontSize = '14px'
-        numberElement.style.color = '#fff'
-        numberElement.style.backgroundColor = '#4b47e8'
-        numberElement.style.borderRadius = '0 10px 10px'
-        numberElement.style.fontWeight = '500'
-        numberElement.style.zIndex = '1'
+
+        // 应用序号样式
+        applyStyles([numberElement], {}, {
+          'position': 'absolute',
+          'top': '-12px',
+          'left': '20px',
+          'width': '50px',
+          'height': '24px',
+          'line-height': '24px',
+          'text-align': 'center',
+          'font-size': '14px',
+          'color': '#fff',
+          'background-color': '#4b47e8',
+          'border-radius': '0 10px 10px',
+          'font-weight': '500',
+          'z-index': '1',
+          'display': 'inline-block',
+          'user-select': 'none',
+        })
 
         // 添加序号到容器
         containerElement.insertBefore(numberElement, containerElement.firstChild)
