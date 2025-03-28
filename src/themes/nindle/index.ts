@@ -38,7 +38,7 @@ export const nindleTheme: ThemeStyles = {
       'max-width': '100%',
       'height': 'auto',
       'border-radius': '12px',
-      'margin-bottom': '15px',
+      'margin-bottom': '25px',
     },
     strong: {},
     em: {
@@ -62,6 +62,8 @@ export const nindleTheme: ThemeStyles = {
         'margin': '0 0 16px',
         'border': '1px dashed #5b9cf8',
         'border-radius': '12px',
+        'position': 'relative',
+        'padding-top': '20px',
       },
     },
   },

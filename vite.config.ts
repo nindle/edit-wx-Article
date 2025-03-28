@@ -14,5 +14,6 @@ export default defineConfig({
   server: {
     port: 5050, // 修改为你想要的端口号，例如 8080
     strictPort: true, // 设为 true 时若端口被占用会直接退出，而不是尝试其他端口
+    open: true,
   },
 })
