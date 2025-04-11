@@ -31,7 +31,7 @@ export const nindleTheme: ThemeStyles = {
       },
     },
     paragraph: {
-      margin: '0 0 10px',
+      margin: '0 0 16px',
     },
     image: {
       'display': 'block',
@@ -59,7 +59,7 @@ export const nindleTheme: ThemeStyles = {
     container: {
       default: {
         'padding': '12px',
-        'margin': '0 0 16px',
+        'margin': '0 0 22px',
         'border': '1px dashed #5b9cf8',
         'border-radius': '12px',
       },
