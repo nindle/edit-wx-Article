@@ -40,3 +40,40 @@ export async function verifyPassword(password: string): Promise<{ success: boole
     return { success: false, message: '网络请求失败' }
   }
 }
+
+/**
+ * 获取全局访问次数
+ * @returns 一个Promise，解析为访问次数对象
+ */
+export async function getVisitCount(): Promise<{ data: number, success: boolean, message?: string }> {
+  try {
+    const response = await api.get('/api/count')
+    return response.data
+  } catch (error) {
+    console.error('获取访问次数失败:', error)
+    if (axios.isAxiosError(error) && error.response) {
+      return {
+        data: 0,
+        success: false,
+        message: `请求失败: ${error.response.status} - ${error.response.statusText}`,
+      }
+    }
+    return { data: 0, success: false, message: '网络请求失败' }
+  }
+}
+
+/**
+ * 更新全局访问次数
+ * @returns 一个Promise，解析为更新结果对象
+ */
+export async function updateVisitCount(): Promise<{ success: boolean, message?: string }> {
+  try {
+    const response = await api.post('/api/count', {
+      action: 'inc',
+    })
+    return response.data
+  } catch (error) {
+    console.error('更新访问次数失败:', error)
+    return { success: false, message: '网络请求失败' }
+  }
+}
