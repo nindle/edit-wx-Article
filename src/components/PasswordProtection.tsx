@@ -1,11 +1,10 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useLocalStorage } from '@/hooks/useLocalStorage'
+import { verifyPassword } from '@/lib/utils'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
-// 设置固定密码
-const FIXED_PASSWORD = 'md2wx123'
+// 设置微信号
 const WECHAT_ID = 'Nindle_' // 微信号
 
 interface PasswordProtectionProps {
@@ -15,19 +14,26 @@ interface PasswordProtectionProps {
 export default function PasswordProtection({ onAuthenticated }: PasswordProtectionProps) {
   const [password, setPassword] = useState('')
   const [showQRCode, setShowQRCode] = useState(false)
-  const { setValue: setAuthenticated } = useLocalStorage<boolean>('isAuthenticated', false)
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setLoading(true)
 
-    if (password === FIXED_PASSWORD) {
-      toast.success('验证成功')
-      // 验证成功后，将认证状态保存到本地存储
-      setAuthenticated(true)
-      onAuthenticated()
-    }
-    else {
-      toast.error('密码错误')
+    try {
+      // 使用API验证
+      const data = await verifyPassword(password)
+      if (data.success) {
+        toast.success('验证成功')
+        onAuthenticated()
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      console.error('验证过程出错:', error)
+      toast.error('验证过程出错，请稍后重试')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -35,7 +41,7 @@ export default function PasswordProtection({ onAuthenticated }: PasswordProtecti
   const handleCopyWechat = async () => {
     try {
       await navigator.clipboard.writeText(WECHAT_ID)
-      toast.success('微信号已复制到剪贴板')
+      toast.success('公众号已复制到剪贴板')
     }
     catch (err) {
       console.error(err)
@@ -64,9 +70,9 @@ export default function PasswordProtection({ onAuthenticated }: PasswordProtecti
         </div>
 
         {/* 提示文本 */}
-        <div className="space-y-2 text-center text-gray-600">
-          <p>关注公众号【Nindle】发送【密码】获取访问密码</p>
-          <p>若提示密码不对，请清理浏览器缓存再输入</p>
+        <div className="flex flex-col items-center justify-center space-y-2 text-center text-gray-600">
+          <img src="./wx-qrcode.jpg" alt="二维码" className="w-52 h-52" />
+          <p>扫码关注公众号【Nindle】发送【验证码】获取验证码</p>
           <p>仅供本人学习研究，禁止一切商用行为</p>
           <p>如有侵犯权益，敬请联系删除</p>
         </div>
@@ -74,26 +80,27 @@ export default function PasswordProtection({ onAuthenticated }: PasswordProtecti
         {/* 输入框和按钮组 */}
         <div className="space-y-4">
           <Input
-            type="password"
-            placeholder="请输入访问密码"
+            placeholder="请输入验证码"
             value={password}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             className="w-full border-gray-300"
+            disabled={loading}
           />
           <div className="grid grid-cols-3 gap-2">
             <Button
               type="submit"
               onClick={handleSubmit}
               className="bg-green-600 hover:bg-green-700 text-white"
+              disabled={loading}
             >
-              确认访问
+              {loading ? '验证中...' : '确认访问'}
             </Button>
             <Button
               type="button"
               onClick={handleCopyWechat}
               className="bg-yellow-500 hover:bg-yellow-600 text-white"
             >
-              复制微信号
+              复制公众号
             </Button>
             <Button
               type="button"
@@ -115,7 +122,7 @@ export default function PasswordProtection({ onAuthenticated }: PasswordProtecti
                 </h3>
                 <div className="bg-gray-100 p-4 rounded-lg">
                   <img
-                    src="./showQRCode.jpeg" // 需要替换为实际的二维码图片路径
+                    src="./showQRCode.jpeg"
                     alt="群聊二维码"
                     className="w-full h-auto"
                   />

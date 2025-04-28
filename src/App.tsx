@@ -13,10 +13,8 @@ import { generateInlineStyledHtml, parseMarkdown } from './lib'
 import { defaultTheme, getThemeByCode } from './themes'
 
 function App() {
-  // 从本地存储中获取认证状态
-  const { value: savedAuthState } = useLocalStorage<boolean>('isAuthenticated', false)
   // 是否已通过密码验证
-  const [isAuthenticated, setIsAuthenticated] = useState(savedAuthState || false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   // 从本地存储中获取保存的 Markdown 内容
   const { value: savedMarkdown } = useLocalStorage<string>('markdownContent', '')

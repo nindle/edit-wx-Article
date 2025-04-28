@@ -5,6 +5,8 @@ export default antfu({
   typescript: true,
   rules: {
     'react-dom/no-dangerously-set-innerhtml': 'off',
+    'no-console': 'off',
+    'style/brace-style': 'off',
   },
   ignores: ['scripts/**/*'],
 })
