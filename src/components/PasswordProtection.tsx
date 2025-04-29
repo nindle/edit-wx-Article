@@ -1,11 +1,13 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { verifyPassword } from '@/lib/utils'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 // 设置微信号
 const WECHAT_ID = 'Nindle_' // 微信号
+// 验证有效期（毫秒）
+const AUTH_VALID_DURATION = 24 * 60 * 60 * 1000 // 1天
 
 interface PasswordProtectionProps {
   onAuthenticated: () => void
@@ -16,6 +18,19 @@ export default function PasswordProtection({ onAuthenticated }: PasswordProtecti
   const [showQRCode, setShowQRCode] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  // 检查本地存储中是否有有效的验证信息
+  useEffect(() => {
+    const storedAuth = localStorage.getItem('auth_timestamp')
+    if (storedAuth) {
+      const authTime = Number.parseInt(storedAuth, 10)
+      const currentTime = Date.now()
+      // 如果验证时间在有效期内
+      if (currentTime - authTime < AUTH_VALID_DURATION) {
+        onAuthenticated()
+      }
+    }
+  }, [onAuthenticated])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
@@ -24,6 +39,8 @@ export default function PasswordProtection({ onAuthenticated }: PasswordProtecti
       // 使用API验证
       const data = await verifyPassword(password)
       if (data.success) {
+        // 保存验证时间到本地存储
+        localStorage.setItem('auth_timestamp', Date.now().toString())
         toast.success('验证成功')
         onAuthenticated()
       } else {
