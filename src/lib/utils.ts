@@ -9,7 +9,7 @@ export function cn(...inputs: ClassValue[]) {
 
 // 创建一个axios实例
 export const api = axios.create({
-  baseURL: 'https://wx.nindle.cn',
+  baseURL: 'https://wx.api.nindle.cn',
   timeout: 5000,
   headers: {
     'Content-Type': 'application/json',
