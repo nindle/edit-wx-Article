@@ -9,7 +9,7 @@ export function cn(...inputs: ClassValue[]) {
 
 // 创建一个axios实例
 export const api = axios.create({
-  baseURL: 'https://wx.api.nindle.cn',
+  baseURL: 'https://api.nindle.cn',
   timeout: 5000,
   headers: {
     'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ export async function verifyPassword(password: string): Promise<{ success: boole
  * 获取全局访问次数
  * @returns 一个Promise，解析为访问次数对象
  */
-export async function getVisitCount(): Promise<{ data: number, success: boolean, message?: string }> {
+export async function getVisitCount(): Promise<{ data: any, success: boolean, message?: string }> {
   try {
     const response = await api.get('/api/count')
     return response.data

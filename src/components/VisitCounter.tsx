@@ -1,5 +1,6 @@
 import { getVisitCount } from '@/lib/utils'
 import { useEffect, useRef, useState } from 'react'
+import { toast } from 'sonner'
 
 interface VisitCounterProps {
   className?: string
@@ -14,9 +15,11 @@ export default function VisitCounter({ className = '', refreshInterval = 60000 }
   const fetchVisitCount = async () => {
     try {
       setLoading(true)
-      const data = await getVisitCount()
-      if (data.success) {
-        setVisitCount(data.data)
+      const { data, success, message } = await getVisitCount()
+      if (success) {
+        setVisitCount(data?.count)
+      } else {
+        toast.error(message)
       }
     } catch (error) {
       console.error('获取访问次数失败:', error)

@@ -37,14 +37,14 @@ export default function PasswordProtection({ onAuthenticated }: PasswordProtecti
 
     try {
       // 使用API验证
-      const data = await verifyPassword(password)
-      if (data.success) {
+      const { success, message } = await verifyPassword(password)
+      if (success) {
         // 保存验证时间到本地存储
         localStorage.setItem('auth_timestamp', Date.now().toString())
         toast.success('验证成功')
         onAuthenticated()
       } else {
-        toast.error(data.message)
+        toast.error(message)
       }
     } catch (error) {
       console.error('验证过程出错:', error)
